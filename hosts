@@ -7,15 +7,12 @@ m3
 dn
 
 [m1]
-ec2-54-186-186-13.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
-
+ec2-54-244-1-56.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
 [m2]
-ec2-54-213-40-45.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
-
+ec2-54-244-200-32.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
 [m3]
-ec2-54-149-56-29.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
-
+ec2-54-244-206-149.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
 [dn]
-ec2-54-244-218-19.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
-ec2-54-244-218-2.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
-ec2-54-244-192-108.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
+ec2-54-245-3-153.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
+ec2-54-245-3-186.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
+ec2-54-244-205-11.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem

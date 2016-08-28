@@ -1,4 +1,7 @@
 ---
+  - name: remove line
+    local_action: 
+      lineinfile dest=hosts regexp="compute.amazonaws.com" state=absent
   - name: Launch First Master Instance
     ec2: 
       instance_tags:
@@ -11,15 +14,11 @@
       region: "{{ region }}" 
       keypair: "{{ keypair }}"
     register: ec2
-  - name: Add group head line
-    local_action: 
-      lineinfile dest=hosts line="[m1]"
   - name: Add instance to local host group
     local_action: 
-      lineinfile dest=hosts regexp="{{ item.public_dns_name }}" line="{{ item.public_dns_name }} ansible_ssh_private_key_file=~/.ssh/{{ keypair }}.pem"
+      lineinfile dest=hosts insertafter="m1" line="{{ item.public_dns_name }} ansible_ssh_private_key_file=~/.ssh/{{ keypair }}.pem"
     with_items: "{{ ec2.instances }}"
 
-#lineinfile dest=hosts regexp="{{ item.public_dns_name }}" insertafter="[launched]" line="{{ item.public_dns_name }} ansible_ssh_private_key_file=~/.ssh/{{ keypair }}.pem"OB
 
   - name: Launch Second Master Instance
     ec2: 
@@ -33,12 +32,9 @@
       region: "{{ region }}" 
       keypair: "{{ keypair }}"
     register: ec2
-  - name: Add group head line
-    local_action: 
-      lineinfile dest=hosts line="[m2]"
   - name: Add instance to local host group
     local_action: 
-      lineinfile dest=hosts regexp="{{ item.public_dns_name }}" line="{{ item.public_dns_name }} ansible_ssh_private_key_file=~/.ssh/{{ keypair }}.pem"
+      lineinfile dest=hosts insertafter="m2" line="{{ item.public_dns_name }} ansible_ssh_private_key_file=~/.ssh/{{ keypair }}.pem"
     with_items: "{{ ec2.instances }}"
     
   - name: Launch Third Master Instance
@@ -53,12 +49,9 @@
       region: "{{ region }}" 
       keypair: "{{ keypair }}"
     register: ec2
-  - name: Add group head line
-    local_action: 
-      lineinfile dest=hosts line="[m3]"
   - name: Add instance to local host group
     local_action: 
-      lineinfile dest=hosts regexp="{{ item.public_dns_name }}" line="{{ item.public_dns_name }} ansible_ssh_private_key_file=~/.ssh/{{ keypair }}.pem"
+      lineinfile dest=hosts insertafter="m3" line="{{ item.public_dns_name }} ansible_ssh_private_key_file=~/.ssh/{{ keypair }}.pem"
     with_items: "{{ ec2.instances }}"
     
   - name: Launch Worker Instances
@@ -74,12 +67,9 @@
       region: "{{ region }}" 
       keypair: "{{ keypair }}"
     register: ec2
-  - name: Add group head line
-    local_action: 
-      lineinfile dest=hosts line="[dn]"
   - name: Add instance to local host group
     local_action: 
-      lineinfile dest=hosts regexp="{{ item.public_dns_name }}" line="{{ item.public_dns_name }} ansible_ssh_private_key_file=~/.ssh/{{ keypair }}.pem"
+      lineinfile dest=hosts insertafter="dn" line="{{ item.public_dns_name }} ansible_ssh_private_key_file=~/.ssh/{{ keypair }}.pem"
     with_items: "{{ ec2.instances }}"
 
   - name: Wait for SSH to come up
