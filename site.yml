@@ -1,11 +1,11 @@
-- name: Provision EC2 instances
-  hosts: localhost
-  connection: local
-  gather_facts: False 
-  user: "{{ remote_user }}"
-  tags: provisioning
-  roles:
-    - ec2_launch
+#- name: Provision EC2 instances
+#  hosts: localhost
+#  connection: local
+#  gather_facts: True 
+#  user: "{{ remote_user }}"
+#  tags: provisioning
+#  roles:
+#    - ec2_launch
 
 - name: Initial Linux config and Ambari Agent install
   hosts: hadoop_all
@@ -21,6 +21,7 @@
   sudo: yes
   roles:
     - ambari-server
+    
 - hosts: hadoop_all
   name: Gather facts from collectors
   user: "{{ remote_user }}"
