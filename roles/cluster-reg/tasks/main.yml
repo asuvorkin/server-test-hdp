@@ -1,0 +1,35 @@
+---
+  - name: re-generate fact
+    action: setup
+
+  - name: copy blueprint
+    template: src=../../../blueprints/ha.json.j2 dest=/tmp/blueprint.json
+    register: blueprint
+
+#  - name: copy host-mapping
+#    template: src=../../../blueprints/host-mapping.json.j2 dest=/tmp/host-mapping.json
+#    register: hostmap
+
+  - name: copy host-mapping
+    template: src=../../../blueprints/host-mapping-2.json.j2 dest=/tmp/host-mapping2.json
+    register: hostmap
+
+  - name: copy template script
+    template: src=register_launch.sh.j2 dest=/tmp/register_launch.sh mode=0755 
+    when: blueprint|changed or hostmap|changed
+
+#  - name: register blueprint & hostmap
+#    shell: /tmp/register_launch.sh
+#    when: blueprint|changed or hostmap|changed
+
+#  - name: copy script to check completed installation
+#    template: src=monitor_installation.sh.j2 dest=/tmp/monitor_installation.sh mode=0755
+#
+#  - name: wait for installation to complete
+#    shell: /tmp/monitor_installation.sh
+#    register: complete_installation
+#    until: complete_installation.stdout.find("INSTALL_DONE") != -1
+#    retries: 30
+#    delay: 60
+
+#  - debug: var=complete_installation

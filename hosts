@@ -1,0 +1,21 @@
+[local]
+localhost
+[hadoop_all:children]
+m1
+m2
+m3
+dn
+
+[m1]
+ec2-54-186-186-13.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
+
+[m2]
+ec2-54-213-40-45.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
+
+[m3]
+ec2-54-149-56-29.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
+
+[dn]
+ec2-54-244-218-19.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
+ec2-54-244-218-2.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem
+ec2-54-244-192-108.us-west-2.compute.amazonaws.com ansible_ssh_private_key_file=~/.ssh/ansible2.pem

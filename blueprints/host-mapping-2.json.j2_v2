@@ -1,0 +1,37 @@
+{
+  "blueprint" : "{{ cluster_name }}",
+  "default_password" : "hadoop",
+  "configurations": [
+    { "yarn-site" : {
+        "yarn.resourcemanager.zk-address" : "{{ hostvars[groups['m1'][0]]['ansible_fqdn'] }}:2181,{{ hostvars[groups['m2'][0]]['ansible_fqdn'] }}:2181,{{ hostvars[groups['m3'][0]]['ansible_fqdn'] }}:2181",
+        "yarn.resourcemanager.hostname.rm1" : "{{ hostvars[groups['m1'][0]]['ansible_fqdn'] }}",
+        "yarn.resourcemanager.hostname.rm2" : "{{ hostvars[groups['m2'][0]]['ansible_fqdn'] }}"
+     }}
+  ],
+  "host_groups" :[
+    {
+      "name" : "m1",
+      "hosts" : [
+        {
+          "fqdn" : "{{ hostvars[groups['m1'][0]]['ansible_fqdn'] }}"
+        }
+      ]
+    },
+    {
+      "name" : "m2",
+      "hosts" : [
+        {
+          "fqdn" : "{{ hostvars[groups['m2'][0]]['ansible_fqdn'] }}"
+        }
+      ]
+    },
+    {
+      "name" : "m3",
+      "hosts" : [
+        {
+          "fqdn" : "{{ hostvars[groups['m3'][0]]['ansible_fqdn'] }}"
+        }
+      ]
+    }
+  ]
+}

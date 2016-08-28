@@ -1,0 +1,16 @@
+---
+  - name: install ambari-server
+    yum: name=ambari-server state=present
+    register: ambari_installed
+ 
+  - name: configure ambari server
+    shell: /usr/sbin/ambari-server setup -s
+    when: ambari_installed|changed
+
+  - name: start ambari server
+    service: name=ambari-server state=started enabled=on
+    register: ambari_up
+
+  - name: check if ambari server is up
+    wait_for: state=started port=8080 delay=15
+    when: ambari_up|changed

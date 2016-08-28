@@ -1,0 +1,175 @@
+{
+	"configurations": [{
+		"core-site": {
+			"properties_attributes": {},
+			"properties": {
+				"hadoop.proxyuser.root.groups": "*",
+				"hadoop.proxyuser.root.hosts": "*",
+				"fs.defaultFS": "hdfs://{{ cluster_name }}",
+				"ha.zookeeper.quorum": "%HOSTGROUP::m1%:2181,%HOSTGROUP::m2%:2181,%HOSTGROUP::m3%:2181"
+			}
+		}
+	}, {
+		"hdfs-site": {
+			"properties": {
+				"dfs.client.failover.proxy.provider.{{ cluster_name }}": "org.apache.hadoop.hdfs.server.namenode.ha.ConfiguredFailoverProxyProvider",
+				"dfs.ha.automatic-failover.enabled": "true",
+				"dfs.ha.fencing.methods": "shell(/bin/true)",
+				"dfs.ha.namenodes.{{ cluster_name }}": "nn1,nn2",
+				"dfs.namenode.http-address": "%HOSTGROUP::m1%:50070",
+				"dfs.namenode.http-address.{{ cluster_name }}.nn1": "%HOSTGROUP::m1%:50070",
+				"dfs.namenode.http-address.{{ cluster_name }}.nn2": "%HOSTGROUP::m3%:50070",
+				"dfs.namenode.https-address": "%HOSTGROUP::m1%:50470",
+				"dfs.namenode.https-address.{{ cluster_name }}.nn1": "%HOSTGROUP::m1%:50470",
+				"dfs.namenode.https-address.{{ cluster_name }}.nn2": "%HOSTGROUP::m3%:50470",
+				"dfs.namenode.rpc-address.{{ cluster_name }}.nn1": "%HOSTGROUP::m1%:8020",
+				"dfs.namenode.rpc-address.{{ cluster_name }}.nn2": "%HOSTGROUP::m3%:8020",
+				"dfs.namenode.shared.edits.dir": "qjournal://%HOSTGROUP::m1%:8485;%HOSTGROUP::m2%:8485;%HOSTGROUP::m3%:8485/{{ cluster_name }}",
+				"dfs.nameservices": "{{ cluster_name }}"
+			}
+		}
+	}, {
+		"yarn-site": {
+			"properties": {
+				"hadoop.registry.rm.enabled": "false",
+				"hadoop.registry.zk.quorum": "%HOSTGROUP::m3%:2181,%HOSTGROUP::m2%:2181,%HOSTGROUP::m1%:2181",
+				"yarn.log.server.url": "http://%HOSTGROUP::m2%:19888/jobhistory/logs",
+				"yarn.resourcemanager.address": "%HOSTGROUP::m2%:8050",
+				"yarn.resourcemanager.admin.address": "%HOSTGROUP::m2%:8141",
+				"yarn.resourcemanager.cluster-id": " {{ cluster_name }} ",
+				"yarn.resourcemanager.ha.automatic-failover.zk-base-path": "/yarn-leader-election",
+				"yarn.resourcemanager.ha.enabled": "true",
+				"yarn.resourcemanager.ha.rm-ids": "rm1,rm2",
+				"yarn.resourcemanager.hostname": "%HOSTGROUP::m2%",
+				"yarn.resourcemanager.recovery.enabled": "true",
+				"yarn.resourcemanager.resource-tracker.address": "%HOSTGROUP::m2%:8025",
+				"yarn.resourcemanager.scheduler.address": "%HOSTGROUP::m2%:8030",
+				"yarn.resourcemanager.store.class": "org.apache.hadoop.yarn.server.resourcemanager.recovery.ZKRMStateStore",
+				"yarn.resourcemanager.webapp.address": "%HOSTGROUP::m2%:8088",
+				"yarn.resourcemanager.webapp.https.address": "%HOSTGROUP::m2%:8090",
+				"yarn.timeline-service.address": "%HOSTGROUP::m2%:10200",
+				"yarn.timeline-service.webapp.address": "%HOSTGROUP::m2%:8188",
+				"yarn.timeline-service.webapp.https.address": "%HOSTGROUP::m2%:8190"
+			}
+		}
+	}],
+
+	"host_groups": [{
+			"name": "m1",
+			"components": [{
+				"name": "NAMENODE"
+			}, {
+				"name": "HDFS_CLIENT"
+			}, {
+				"name": "RESOURCEMANAGER"
+			}, {
+				"name": "HISTORYSERVER"
+			}, {
+				"name": "ZOOKEEPER_SERVER"
+			}, {
+				"name": "ZOOKEEPER_CLIENT"
+			}, {
+				"name": "HIVE_SERVER"
+			}, {
+				"name": "METRICS_MONITOR"
+			}, {
+				"name": "HIVE_METASTORE"
+			}, {
+				"name": "TEZ_CLIENT"
+			}, {
+				"name": "PIG"
+			}, {
+				"name": "MYSQL_SERVER"
+			}, {
+				"name": "HCAT"
+			}, {
+				"name": "JOURNALNODE"
+			}, {
+				"name": "WEBHCAT_SERVER"
+			}, {
+				"name": "SUPERVISOR"
+			}, {
+				"name": "ZKFC"
+			}]
+		}, {
+			"name": "m2",
+			"components": [{
+				"name": "APP_TIMELINE_SERVER"
+			}, {
+				"name": "STORM_UI_SERVER"
+			}, {
+				"name": "KAFKA_BROKER"
+			}, {
+				"name": "ZOOKEEPER_SERVER"
+			}, {
+                                "name": "RESOURCEMANAGER"
+                        }, {
+				"name": "NIMBUS"
+			}, {
+				"name": "DRPC_SERVER"
+			}, {
+				"name": "YARN_CLIENT"
+			}, {
+				"name": "MAPREDUCE2_CLIENT"
+			}, {
+				"name": "ZOOKEEPER_CLIENT"
+			}, {
+				"name": "TEZ_CLIENT"
+			}, {
+				"name": "JOURNALNODE"
+			}, {
+				"name": "HIVE_CLIENT"
+			}]
+		}, {
+			"name": "m3",
+			"components": [{
+                                "name": "NAMENODE"
+                        }, {
+				"name": "KAFKA_BROKER"
+			}, {
+				"name": "ZOOKEEPER_SERVER"
+			}, {
+				"name": "YARN_CLIENT"
+			}, {
+				"name": "MAPREDUCE2_CLIENT"
+			}, {
+				"name": "ZOOKEEPER_CLIENT"
+			}, {
+				"name": "TEZ_CLIENT"
+			}, {
+				"name": "JOURNALNODE"
+			}, {
+				"name": "ZKFC"
+			}, {
+				"name": "HIVE_CLIENT"
+			}]
+		}, {
+			"name": "dn",
+			"components": [{
+				"name": "DATANODE"
+			}, {
+				"name": "HDFS_CLIENT"
+			}, {
+				"name": "NODEMANAGER"
+			}, {
+				"name": "YARN_CLIENT"
+			}, {
+				"name": "MAPREDUCE2_CLIENT"
+			}, {
+				"name": "ZOOKEEPER_CLIENT"
+			}, {
+				"name": "TEZ_CLIENT"
+			}, {
+				"name": "METRICS_COLLECTOR"
+			}, {
+				"name": "HIVE_CLIENT"
+			}]
+		}
+
+	],
+	"Blueprints": {
+		"blueprint_name": "{{ cluster_name }}",
+		"stack_name": "HDP",
+		"stack_version": "{{ hdp_stack }}"
+	}
+}
