@@ -13,6 +13,8 @@ ANSIBLE_HOSTS=/etc/ansible/ec2.py
 
 All configuration is done through group-vars/all file:
 
+```python
+
 # repos
 #ambari_repo : http://public-repo-1.hortonworks.com/ambari/centos6/2.x/updates/2.1.0
 #hdp_repo : http://public-repo-1.hortonworks.com/HDP/centos6/2.x/updates/2.2.6.0
@@ -43,3 +45,5 @@ region : us-west-2
 keypair : ansible2
 
 security_group : CentOS 7 -x86_64- - with Updates HVM-1602-AutogenByAWSMP-
+
+```
