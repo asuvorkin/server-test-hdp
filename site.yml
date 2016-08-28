@@ -1,7 +1,7 @@
 #- name: Provision EC2 instances
 #  hosts: localhost
 #  connection: local
-#  gather_facts: True 
+#  gather_facts: False 
 #  user: "{{ remote_user }}"
 #  tags: provisioning
 #  roles:
