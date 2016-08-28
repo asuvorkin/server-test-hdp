@@ -9,7 +9,7 @@ AWS_SECRET_ACCESS_KEY=
 AWS_ACCESS_KEY_ID=
 EC2_INI_PATH=/etc/ansible/ec2.ini
 ANSIBLE_HOSTS=/etc/ansible/ec2.py
-'''
+```
 
 AWS access .pem file should be placed in ~/.ssh folder with "chmod 400" rights.
 
@@ -58,6 +58,6 @@ security_group : CentOS 7 -x86_64- - with Updates HVM-1602-AutogenByAWSMP-
 ```
 
 # Important Note: 
-Currently playbook finishes at copying blueprint, host-mapping and shell script file to Master Node - m1, which Ambari Server as well. 
+Currently playbook finishes at copying blueprint, host-mapping and shell script file to Master Node - m1, which is Ambari Server as well. 
 In order to start cluster deployment it's neccessary to ssh to m1 and run register_launch.sh from /tmp folder.
 Alternatively for fully automatic deployment uncomment last steps in roles/cluster-reg/tasks/main.yml
