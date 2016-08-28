@@ -1,4 +1,0 @@
-#!/bin/bash
-
-curl -u admin:admin -i -H 'X-Requested-By: ambari' -X POST -d @/tmp/blueprint.json http://{{ hostvars[groups['m1'][0]]['ansible_fqdn'] }}:8080/api/v1/blueprints/{{ cluster_name }} > /tmp/blueprint.log
-curl -u admin:admin -i -H 'X-Requested-By: ambari' -X POST -d @/tmp/host-mapping2.json http://{{ hostvars[groups['m1'][0]]['ansible_fqdn'] }}:8080/api/v1/clusters/{{ cluster_name }} >> /tmp/blueprint.log

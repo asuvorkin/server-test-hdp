@@ -6,10 +6,6 @@
     template: src=../../../blueprints/ha.json.j2 dest=/tmp/blueprint.json
     register: blueprint
 
-#  - name: copy host-mapping
-#    template: src=../../../blueprints/host-mapping.json.j2 dest=/tmp/host-mapping.json
-#    register: hostmap
-
   - name: copy host-mapping
     template: src=../../../blueprints/host-mapping-2.json.j2 dest=/tmp/host-mapping2.json
     register: hostmap
