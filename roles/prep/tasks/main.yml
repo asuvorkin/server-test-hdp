@@ -30,6 +30,15 @@
   - name: switch off selinux permanently
     lineinfile: dest=/etc/selinux/config regexp=^SELINUX= line=SELINUX=disabled
     register: ambari_installed
+    ignore_errors: true
+
+  - name: Disable firewall
+    command: systemctl disable firewalld
+    ignore_errors: true
+    
+  - name: Stop firewall
+    command: systemctl stop firewalld
+    ignore_errors: true
 
   - name: install ntp server
     yum: name=ntp state=present

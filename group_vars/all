@@ -13,20 +13,25 @@ hdp_utils: 1.1.0.20
 
 os: centos7
 
-cluster_name : hdfs-ha
+cluster_name : hdfs-ha-tokyo
 
 blueprint : ha.json.j2
 
 instance_type : m4.large
 
-remote_user : centos
+remote_user : root
 
-image : ami-d2c924b2
+#image : ami-d2c924b2
+image : ami-014f7200
 
-region : us-west-2
+#region : us-west-2
+region : ap-northeast-1
 
-keypair : ansible2
+#keypair : ansible2
+keypair : cosplay
 
-security_group : CentOS 7 -x86_64- - with Updates HVM-1602-AutogenByAWSMP-
+
+#security_group : CentOS 7 -x86_64- - with Updates HVM-1602-AutogenByAWSMP-
+security_group : default
 
 dn_count : 3

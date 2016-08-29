@@ -5,7 +5,7 @@
   user: "{{ remote_user }}"
   tags: provisioning
   roles:
-    - ec2_launch
+#    - ec2_launch
 
 - name: Initial Linux config and Ambari Agent install
   hosts: hadoop_all
